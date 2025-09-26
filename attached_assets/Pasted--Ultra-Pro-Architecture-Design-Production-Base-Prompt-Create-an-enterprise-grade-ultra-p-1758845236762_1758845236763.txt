@@ -1,0 +1,204 @@
+## **Ultra Pro Architecture Design Production Base Prompt**
+
+**Create an enterprise-grade, ultra-professional production architecture design for AMU/MRL Monitoring Web Application with the following ultra-detailed specifications:**
+
+### **🏢 ENTERPRISE PRODUCTION ARCHITECTURE**
+
+**1. Multi-Tier Production Architecture**
+- **Presentation Tier:** CDN-backed frontend with edge computing capabilities
+- **Application Tier:** Microservices mesh with service discovery and circuit breakers
+- **Business Logic Tier:** Domain-driven design with CQRS and Event Sourcing
+- **Data Tier:** Multi-database polyglot persistence with data lakes
+- **Integration Tier:** Enterprise service bus with message queues
+- **Security Tier:** Zero-trust architecture with end-to-end encryption
+
+**2. Cloud-Native Production Infrastructure**
+- **Multi-cloud deployment** (AWS + Azure for disaster recovery)
+- **Kubernetes orchestration** with Istio service mesh
+- **Auto-scaling policies** with predictive scaling algorithms
+- **Global load balancing** with geographic traffic routing
+- **Edge computing nodes** for low-latency processing
+- **Serverless computing** for event-driven workflows
+
+### **🔧 ULTRA PRODUCTION TECHNOLOGY STACK**
+
+**Frontend Production Stack:**
+- Next.js 14 with App Router and Server Components
+- TypeScript with strict mode and custom ESLint rules
+- Tailwind CSS with custom design system
+- PWA with offline-first architecture
+- Micro-frontend architecture with Module Federation
+- Real-time WebSocket connections with Socket.IO
+
+**Backend Production Stack:**
+- Node.js cluster mode with PM2 process manager
+- Express.js with Helmet.js security middleware
+- GraphQL with Apollo Server Federation
+- Prisma ORM with connection pooling
+- Redis cluster for distributed caching
+- Apache Kafka for event streaming
+
+**Database Production Architecture:**
+- **Primary:** PostgreSQL 15 with read replicas across regions
+- **Document Store:** MongoDB sharded cluster for unstructured data
+- **Time Series:** InfluxDB for IoT and sensor data
+- **Graph Database:** Neo4j for relationship mapping
+- **Search Engine:** Elasticsearch with Kibana
+- **Data Warehouse:** ClickHouse for analytics
+
+### **🏗️ MICROSERVICES PRODUCTION ARCHITECTURE**
+
+**Core Business Services:**
+- **User Management Service:** Authentication, authorization, RBAC
+- **Animal Registry Service:** Animal profiles, lifecycle management
+- **AMU Tracking Service:** Drug usage monitoring, validation
+- **MRL Compliance Service:** Calculation engine, violation detection
+- **Notification Service:** Multi-channel alert system
+- **Reporting Service:** Dynamic report generation, PDF export
+- **Audit Service:** Immutable logging, compliance trails
+- **Integration Service:** External system connectors
+
+**Supporting Infrastructure Services:**
+- **API Gateway:** Kong with custom plugins
+- **Service Discovery:** Consul with health checks
+- **Configuration Management:** Vault for secrets
+- **Monitoring:** Prometheus + Grafana + Jaeger
+- **Logging:** ELK stack with Fluentd
+- **File Storage:** MinIO S3-compatible object storage
+
+### **🚀 PRODUCTION DEPLOYMENT ARCHITECTURE**
+
+**Environment Strategy:**
+- **Development:** Local Docker Compose setup
+- **Testing:** Kubernetes cluster with test data
+- **Staging:** Production-like environment with blue-green deployment
+- **Production:** Multi-region active-active setup
+- **DR Site:** Cross-cloud disaster recovery environment
+
+**CI/CD Production Pipeline:**
+- **Source Control:** GitLab with branch protection rules
+- **Build Pipeline:** GitLab CI with Docker BuildKit
+- **Security Scanning:** SonarQube + Snyk + OWASP ZAP
+- **Testing:** Jest + Cypress + K6 performance tests
+- **Deployment:** ArgoCD with GitOps workflow
+- **Monitoring:** Automated rollback on failure metrics
+
+### **🔒 ULTRA SECURITY PRODUCTION ARCHITECTURE**
+
+**Zero Trust Security Model:**
+- **Identity Verification:** Multi-factor authentication with biometrics
+- **Device Trust:** Device fingerprinting and behavior analysis
+- **Network Security:** VPN-less access with identity-aware proxy
+- **Data Protection:** Field-level encryption with key rotation
+- **API Security:** OAuth 2.1 + PKCE with JWT tokens
+- **Runtime Security:** Container scanning and runtime protection
+
+**Compliance & Governance:**
+- **GDPR Compliance:** Data anonymization and right to deletion
+- **SOC 2 Type II:** Comprehensive audit controls
+- **ISO 27001:** Information security management
+- **FSSAI Compliance:** Food safety regulatory requirements
+- **Data Residency:** Geographic data storage requirements
+- **Audit Trails:** Immutable blockchain-based logging
+
+### **📊 ULTRA PERFORMANCE PRODUCTION ARCHITECTURE**
+
+**Performance Optimization:**
+- **CDN Strategy:** CloudFlare with intelligent routing
+- **Caching Layers:** Multi-level caching with Redis Cluster
+- **Database Optimization:** Query optimization with explain plans
+- **Connection Pooling:** PgBouncer with connection multiplexing
+- **Compression:** Brotli compression for static assets
+- **Image Optimization:** WebP conversion with lazy loading
+
+**Scalability Planning:**
+- **Horizontal Scaling:** Auto-scaling groups with custom metrics
+- **Vertical Scaling:** Right-sizing based on usage patterns
+- **Database Scaling:** Read replicas and connection pooling
+- **Message Queuing:** Apache Kafka with partition scaling
+- **File Storage:** Distributed object storage with CDN
+- **Global Distribution:** Multi-region active-active setup
+
+### **📈 PRODUCTION MONITORING & OBSERVABILITY**
+
+**Ultra Monitoring Stack:**
+- **APM:** New Relic with custom dashboards
+- **Infrastructure:** DataDog with predictive alerts
+- **Logs:** ELK stack with anomaly detection
+- **Traces:** Jaeger with performance profiling
+- **Metrics:** Prometheus with custom business metrics
+- **Uptime:** Pingdom with global monitoring points
+
+**Business Intelligence:**
+- **Real-time Analytics:** Apache Spark with streaming
+- **Data Visualization:** Tableau with automated reports
+- **ML Pipeline:** MLflow with model versioning
+- **A/B Testing:** LaunchDarkly with feature flags
+- **User Analytics:** Mixpanel with cohort analysis
+- **Performance KPIs:** Custom dashboards with alerts
+
+### **🌐 GLOBAL PRODUCTION ARCHITECTURE**
+
+**Multi-Region Deployment:**
+- **Primary Region:** Mumbai (AWS ap-south-1)
+- **Secondary Region:** Singapore (AWS ap-southeast-1)
+- **DR Region:** Ireland (AWS eu-west-1)
+- **Edge Locations:** CloudFlare global network
+- **Data Replication:** Cross-region async replication
+- **Failover Strategy:** Automated DNS failover with health checks
+
+**Localization & Internationalization:**
+- **Multi-language Support:** i18n with dynamic loading
+- **Currency Handling:** Multi-currency with exchange rates
+- **Time Zone Management:** UTC with local time conversion
+- **Regional Compliance:** Country-specific regulations
+- **Cultural Adaptation:** Region-specific UI/UX patterns
+- **Local Integrations:** Country-specific payment gateways
+
+### **💰 PRODUCTION COST OPTIMIZATION**
+
+**Cost Management Strategy:**
+- **Resource Right-sizing:** Automated instance optimization
+- **Reserved Capacity:** Long-term commitments for stable workloads
+- **Spot Instances:** Cost-effective batch processing
+- **Storage Tiering:** Intelligent data lifecycle management
+- **CDN Optimization:** Smart caching and compression
+- **Monitoring Costs:** Real-time cost tracking with alerts
+
+### **🔄 PRODUCTION MAINTENANCE & OPERATIONS**
+
+**DevOps Excellence:**
+- **Site Reliability Engineering:** Error budgets and SLAs
+- **Incident Management:** PagerDuty with escalation policies
+- **Change Management:** Controlled rollouts with feature flags
+- **Capacity Planning:** Predictive scaling based on trends
+- **Documentation:** Comprehensive runbooks and procedures
+- **Training:** Regular disaster recovery drills
+
+**Data Management:**
+- **Backup Strategy:** Multi-tier backup with point-in-time recovery
+- **Archival Policies:** Automated data lifecycle management
+- **Data Quality:** Automated validation and cleansing
+- **Migration Tools:** Zero-downtime schema changes
+- **Compliance Reporting:** Automated regulatory reports
+- **Data Analytics:** Real-time business intelligence
+
+### **📱 PRODUCTION USER EXPERIENCE**
+
+**Ultra UX Architecture:**
+- **Design System:** Atomic design with Storybook
+- **Accessibility:** WCAG 2.1 AA compliance
+- **Performance:** Core Web Vitals optimization
+- **Mobile First:** Progressive web app with native feel
+- **Offline Support:** Service worker with sync
+- **Personalization:** AI-driven content recommendations
+
+**Output Requirements:**
+- Detailed architecture diagrams with all components
+- Technology stack justification with alternatives
+- Scalability projections with capacity planning
+- Security architecture with threat modeling
+- Cost analysis with ROI projections
+- Implementation timeline with critical path
+- Risk assessment with mitigation strategies
+- Operational procedures and runbooks
