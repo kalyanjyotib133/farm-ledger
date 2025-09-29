@@ -1,19 +1,25 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/Sidebar";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
+
+// Layouts
+import { AuthLayout } from "@/layouts/AuthLayout";
+import { DashboardLayout } from "@/layouts/DashboardLayout";
+
+// Pages
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/Landing";
 import Dashboard from "@/pages/Dashboard";
 import Animals from "@/pages/Animals";
 import Treatments from "@/pages/Treatments";
 
-function Router() {
+/**
+ * @returns The routes for authenticated users.
+ */
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
@@ -30,13 +36,25 @@ function Router() {
   );
 }
 
-function AppContent() {
+/**
+ * @returns The routes for unauthenticated users.
+ */
+function AuthRoutes() {
+  return (
+    <Switch>
+      <Route path="/" component={Landing} />
+      {/* For any other route, we'll just show the landing page.
+          This is to prevent 404s on pages that exist in the app but require auth. */}
+      <Route>
+        <Redirect to="/" />
+      </Route>
+    </Switch>
+  );
+}
+
+
+function AppRouter() {
   const { isAuthenticated, isLoading } = useAuth();
-  
-  const style = {
-    "--sidebar-width": "16rem",
-    "--sidebar-width-icon": "3rem",
-  };
 
   if (isLoading) {
     return (
@@ -46,38 +64,18 @@ function AppContent() {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Landing />;
+  if (isAuthenticated) {
+    return (
+      <DashboardLayout>
+        <AppRoutes />
+      </DashboardLayout>
+    );
   }
 
   return (
-    <SidebarProvider style={style as React.CSSProperties}>
-      <div className="flex h-screen w-full">
-        <AppSidebar />
-        <div className="flex flex-col flex-1">
-          <header className="flex items-center justify-between p-4 border-b bg-background">
-            <div className="flex items-center gap-4">
-              <SidebarTrigger data-testid="button-sidebar-toggle" />
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">AMU</span>
-                </div>
-                <div>
-                  <h1 className="font-semibold text-sm">AMU/MRL Monitor</h1>
-                  <p className="text-xs text-muted-foreground">Enterprise Compliance System</p>
-                </div>
-              </div>
-            </div>
-            <ThemeToggle />
-          </header>
-          <main className="flex-1 overflow-auto p-6 bg-muted/20">
-            <div className="max-w-7xl mx-auto">
-              <Router />
-            </div>
-          </main>
-        </div>
-      </div>
-    </SidebarProvider>
+    <AuthLayout>
+      <AuthRoutes />
+    </AuthLayout>
   );
 }
 
@@ -85,7 +83,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AppContent />
+        <AppRouter />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
