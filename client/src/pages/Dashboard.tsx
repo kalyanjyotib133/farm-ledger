@@ -1,36 +1,40 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ComplianceStatusCard } from "@/components/ComplianceStatusCard";
 import { MRLComplianceChart } from "@/components/MRLComplianceChart";
 import { NotificationCenter } from "@/components/NotificationCenter";
-import { Plus, FileText, Download, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
+import { Plus, FileText, Download, RefreshCw, ArrowRight } from "lucide-react";
+
+// Mock refresh function
+async function refreshDashboardData() {
+  console.log("Refreshing dashboard data...");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log("Dashboard data refreshed.");
+}
 
 export default function Dashboard() {
   const { toast } = useToast();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const handleQuickAction = (action: string) => {
-    console.log('Quick action:', action); //todo: remove mock functionality
-    toast({
-      title: "Action Triggered",
-      description: `${action} functionality will be implemented in the full application.`,
-    });
-  };
-
   const handleRefresh = async () => {
     setIsRefreshing(true);
-    console.log('Refreshing dashboard data'); //todo: remove mock functionality
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsRefreshing(false);
-    toast({
-      title: "Dashboard Updated",
-      description: "All compliance data has been refreshed.",
-    });
+    try {
+      await refreshDashboardData();
+      toast({
+        title: "Dashboard Updated",
+        description: "All compliance data has been refreshed.",
+      });
+    } catch (error) {
+      toast({
+        title: "Refresh Failed",
+        description: "Could not update dashboard data.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   return (
@@ -38,26 +42,30 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight" data-testid="title-dashboard">
-            AMU/MRL Compliance Dashboard
+          <h1 className="text-2xl font-bold tracking-tight" data-testid="title-dashboard">
+            Compliance Dashboard
           </h1>
           <p className="text-muted-foreground">
-            Monitor animal drug usage and Maximum Residue Limit compliance across your operation
+            Real-time AMU/MRL compliance monitoring
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline" 
-            onClick={handleRefresh} 
+          <Button
+            variant="outline"
+            onClick={handleRefresh}
             disabled={isRefreshing}
             data-testid="button-refresh"
           >
-            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`}
+            />
             Refresh
           </Button>
-          <Button onClick={() => handleQuickAction('Generate Report')} data-testid="button-generate-report">
-            <FileText className="w-4 h-4 mr-2" />
-            Generate Report
+          <Button asChild>
+            <Link href="/reports">
+              <FileText className="w-4 h-4 mr-2" />
+              Generate Report
+            </Link>
           </Button>
         </div>
       </div>
@@ -94,67 +102,47 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* Charts and Analytics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MRLComplianceChart 
-          type="bar" 
-          title="Monthly Compliance Trends"
-        />
-        <MRLComplianceChart 
-          type="pie" 
-          title="Current Compliance Status"
-        />
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Charts and Analytics */}
+        <div className="lg:col-span-2 space-y-6">
+          <MRLComplianceChart type="bar" title="Monthly Compliance Trends" />
+          <MRLComplianceChart type="pie" title="Current Compliance Status" />
+        </div>
 
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Button 
-              variant="outline" 
-              className="h-20 flex flex-col gap-2" 
-              onClick={() => handleQuickAction('Record New Treatment')}
-              data-testid="button-record-treatment"
-            >
-              <Plus className="w-6 h-6" />
-              <span className="text-sm">Record Treatment</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex flex-col gap-2" 
-              onClick={() => handleQuickAction('Add New Animal')}
-              data-testid="button-add-animal"
-            >
-              <Plus className="w-6 h-6" />
-              <span className="text-sm">Add Animal</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex flex-col gap-2" 
-              onClick={() => handleQuickAction('View Reports')}
-              data-testid="button-view-reports"
-            >
-              <FileText className="w-6 h-6" />
-              <span className="text-sm">View Reports</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex flex-col gap-2" 
-              onClick={() => handleQuickAction('Export Data')}
-              data-testid="button-export-data"
-            >
-              <Download className="w-6 h-6" />
-              <span className="text-sm">Export Data</span>
-            </Button>
+        {/* Quick Actions & Notifications */}
+        <div className="space-y-6">
+          <div className="bg-card border rounded-lg p-4">
+            <h3 className="font-semibold mb-4">Quick Actions</h3>
+            <div className="space-y-3">
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/treatments">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Record Treatment
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/animals">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Animal
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/reports">
+                  <Download className="w-4 h-4 mr-2" />
+                  Export Data
+                </Link>
+              </Button>
+            </div>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Notifications */}
-      <NotificationCenter />
+          <NotificationCenter />
+          <Button variant="ghost" className="w-full" asChild>
+            <Link href="/notifications">
+              View All Notifications
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
